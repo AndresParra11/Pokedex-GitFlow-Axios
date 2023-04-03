@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&family=Shantell+Sans&display=swap');
+
+body{
+    margin:30px;
+}
+
+header{
+    box-sizing: border-box;
+    width:100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    background-color:red;
+    border-radius: 40px 40px 0px 0px;
+    grid-template-areas:
+        "first-post second-post second-post second-post second-post";
+}
+
+#logo-pokebola{
+    grid-area: first-post;
+    display: flex;
+    justify-content: center;
+}
+
+#header-titulo{
+    grid-area: second-post;
+    display: flex;
+    align-items: center;
+}
+
+.header__logo{
+    width:40%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.header__titulo{
+    color: white;
+    font-size: 5vw;
+    font-weight: bold;
+    font-family: 'Shantell Sans', cursive;
+}
+
+main{
+    background-color: whitesmoke;
+    display: grid; /* Divide un espacio en fracciones, p.e (columnas) */
+    grid-template-columns: repeat(6, 1fr); 
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.pokemon{
+    grid-area: 1 / 1 / 2 / 4;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    border: solid 1px black;
+    border-radius: 60px;
+    margin-top: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#pokemon__elemento{
+    grid-area: 1 / 1 / 2 / 3; /*row-in colum-in row-end column-end*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemon__elemento{
+    width:40%;
+    filter:brightness(1.1); /* Quita el fondo blanco de una imagen */
+    mix-blend-mode: multiply; /* Quita el fondo blanco de una imagen */
+}
+
+#pokemon__nombre{
+    grid-area: 1 / 3 / 2 / 6;
+    display: flex;
+    align-items: center;
+}
+
+.pokemon__nombre{
+    color: black;
+    font-size: 2.5vw;
+    font-weight: bold;
+    font-family: 'Shantell Sans', cursive;
+}
+
+#pokemon__imagen{
+    grid-area: 2 / 1 / 6 / 4;
+}
+
+.pokemon__imagen{
+    width: 100%;
+}
+
+.caracteristicas{
+    grid-area: 1 / 4 / 6 / 7;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    background-color: white;
+    border-radius: 10%;
+    margin: 10% 5% 10% 0;
+}
+
+.set{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow:column;
+}
+
+#set1{
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+#set2{
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+#set3{
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+#set4{
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+#set5{
+    grid-area: 3 / 1 / 4 / 2;
+}
+
+#set6{
+    grid-area: 3 / 2 / 4 / 3;
+}
+
+.set__hijo{
+    font-size: 2vw;
+    font-family: 'Shantell Sans', cursive;
+}
+
+.set__hijo2{
+    font-size: 3vw;
+    font-weight: bold;
+    font-family: 'Shantell Sans', cursive;
+    margin-top:10%;
+}
+
+footer{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+    background-color:lightgrey;
+    border-radius: 0px 0px 40px 40px;
+}
+
+.others{
+    grid-area: 1 / 1 / 2 / 4;
+    font-weight: bold;
+    font-size: 3vw;
+    font-family: 'Shantell Sans', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemons__footer{
+    grid-area: 1 / 4 / 2 / 7;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-right: 5%;
+}
+
+.pokemon__footer{
+    width: 8vw;
+    background-color: whitesmoke;
+    border-radius: 10%;
+}
+
+.pokemon__footer:hover{
+    width: 10vw;
+    background-color: darkgrey;
+}
+
+/* MEDIO QUERIES */
+/* Para Movile: Aplique las siguientes propiedades en pantallas
+que cumplan con tamaño de máximo 320px */
+
+@media screen and (max-width: 480px) {
+
+    .header__logo{
+        width:60%;
+        margin-top: 20%;
+        margin-bottom: 20%;
+    }
+    
+    .header__titulo{
+        font-size: 8vw;
+
+    }
+
+    body{
+        margin:10px;
+    }
+
+    main{
+        grid-template-columns: repeat(3, 1fr); 
+        grid-template-rows: repeat(7, 1fr);
+    }
+
+    .pokemon__nombre{
+        font-size: 5vw;
+    }
+
+    .pokemon{
+        grid-area: 1 / 1 / 2 / 4;
+    }
+
+    .pokemon__imagen{
+        grid-area: 2 / 1 / 6 / 4;
+    }
+
+    .caracteristicas{
+        grid-area: 5 / 1 / 8 / 4;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        width: 80%;
+        margin: 10% 10% 10%;
+        height: 80%;
+    }
+
+    #set1{
+        grid-area: 1 / 1 / 2 / 2; 
+    }
+    
+    #set2{
+        grid-area: 2 / 1 / 3 / 2;
+    }
+    
+    #set3{
+        grid-area: 3 / 1 / 4 / 2;
+    }
+    
+    #set4{
+        grid-area: 4 / 1 / 5 / 2;
+    }
+    
+    #set5{
+        grid-area: 5 / 1 / 6 / 2;
+    }
+    
+    #set6{
+        grid-area: 6 / 1 / 7 / 2;
+    }
+
+    .set{
+        flex-flow:unset;
+        justify-content: unset;
+    }
+
+    .set__hijo{
+        margin-left: 20%;
+        width: 100px;
+        font-size: 4vw;
+    }
+
+    .set__hijo2{
+        font-size: 4vw;
+        margin-top: 0%;
+    }
+
+}
