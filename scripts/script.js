@@ -1,8 +1,11 @@
+// Creamos un array donde se generan 5 números aleatorios del 1 al 1000
 let idPokemones = [];
 
 for (let i = 0; i < 5; i++) {
   idPokemones.push(Math.floor(Math.random() * 1000) + 1);
 }
+
+// Creamos la función asincrónica para utilizar el verbo GET y mediante la librería AXIOS
 
 const getAllPokemonById = async (url) => {
   const { data } = await axios.get(url);
