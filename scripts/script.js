@@ -5,7 +5,7 @@ for (let i = 0; i < 5; i++) {
   idPokemones.push(Math.floor(Math.random() * 1000) + 1);
 }
 
-// Creamos la función asincrónica para utilizar el verbo GET y mediante la librería AXIOS
+// Creamos la función asincrónica para utilizar el verbo GET y mediante la librería AXIOS obtenemos la información de los pokemones asociados a los ID generados aleatoriamente.
 
 const getAllPokemonById = async (url) => {
   const { data } = await axios.get(url);
@@ -21,31 +21,32 @@ for (let i = 0; i < 5; i++) {
   );
 }
 
-console.log(pokemones);
-
+// Función para poner la primera letra en mayúscula.
 function capitalizarPrimeraLetra(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+// Creamos una función para pintar las imágenes y la información asociada al pokemón principal mostrado en pantalla.
 const pokemonPpal = pokemones[0];
-console.log(pokemonPpal);
-
-console.log(idPokemones);
-
 const namePokemonPpal = document.querySelector(".pokemon__nombre");
 const imagenPokemonPpal = document.querySelector(".pokemon__imagen");
 const elementoPokemonPpal = document.querySelector(".pokemon__elemento");
 
-const printPokemonPpal = (name, img, img2) => {
-  name.innerHTML = `${capitalizarPrimeraLetra(pokemonPpal.name)}`;
-  img.src = `${pokemonPpal.sprites.front_default}`;
-  img.alt = `${capitalizarPrimeraLetra(pokemonPpal.name)}`;
+const printPokemonPpal = (name, img, img2, pokemon) => {
+  name.innerHTML = `${capitalizarPrimeraLetra(pokemon.name)}`;
+  img.src = `${pokemon.sprites.front_default}`;
+  img.alt = `${capitalizarPrimeraLetra(pokemon.name)}`;
   // Elemento
   img2.src = `${pokemonPpal.sprites.front_default}`;
-  img2.alt = `${capitalizarPrimeraLetra(pokemonPpal.name)}`;
+  img2.alt = `${capitalizarPrimeraLetra(pokemon.name)}`;
 };
 
-printPokemonPpal(namePokemonPpal, imagenPokemonPpal, elementoPokemonPpal);
+printPokemonPpal(
+  namePokemonPpal,
+  imagenPokemonPpal,
+  elementoPokemonPpal,
+  pokemonPpal
+);
 
 const stats = [
   pokemonPpal.id,
