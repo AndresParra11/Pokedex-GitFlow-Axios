@@ -38,7 +38,7 @@ const printInfoPokemonPpal = (name, img, img2, pokemon) => {
   name.innerHTML = `${capitalizeFirstLetter(pokemon.name)}`;
   img.src = `${pokemon.sprites.front_default}`;
   img.alt = `${capitalizeFirstLetter(pokemon.name)}`;
-  
+
   // Element
   img2.src = `${pokemon.sprites.front_default}`;
   img2.alt = `${capitalizeFirstLetter(pokemon.name)}`;
@@ -97,10 +97,11 @@ document.addEventListener("click", (event) => {
   const typePokemon = event.target.getAttribute("name");
   if (typePokemon === "pokemonSec") {
     const idPokemonSecundary = parseInt(event.target.getAttribute("data-id")); //obtenemos el id del pokemon secundario seleccionado
-    const selectedPokemon = pokemones.find((pokemon) => pokemon.id === idPokemonSecundary); //buscamos el pokemon en el arreglo de pokemones
+    const selectedPokemon = pokemones.find(
+      (pokemon) => pokemon.id === idPokemonSecundary
+    ); //buscamos el pokemon en el arreglo de pokemones
 
     sessionStorage.setItem("pokemonPpal", JSON.stringify(selectedPokemon));
     window.location.href = "./index.html";
   }
 });
-
