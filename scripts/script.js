@@ -5,13 +5,14 @@ for (let i = 0; i < 5; i++) {
   idPokemones.push(Math.floor(Math.random() * 1000) + 1);
 }
 
-// Creamos la función asincrónica para utilizar el verbo GET y mediante la librería AXIOS
+// Creamos la función asincrónica para utilizar el verbo GET y mediante la librería AXIOS obtenemos la información de los pokemones asociados a los ID generados aleatoriamente.
 
 const getAllPokemonByUrl = async (url) => {
   const { data } = await axios.get(url);
   return data;
 };
 
+// Consumimos la función getAllPokemonByUrl, modificando la URL con el ID de cada pokemón y la almacenamos en un array de pokemones.
 const pokemones = [];
 for (let i = 0; i < 5; i++) {
   pokemones.push(
@@ -21,21 +22,24 @@ for (let i = 0; i < 5; i++) {
   );
 }
 
+// Creamos una función para poner la primera letra en mayúscula.
+
 function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-const pokemonPpal =
-  JSON.parse(sessionStorage.getItem("pokemonPpal")) || pokemones[0];
+// Creamos una función para pintar las imágenes y la información asociada al pokemón principal mostrado en pantalla.
+const pokemonPpal = pokemones[0];
 const namePokemonPpal = document.querySelector(".pokemon__nombre");
 const imageTagPokemonPpal = document.querySelector(".pokemon__imagen");
-const imageElementPokemonPpal = document.querySelector(".pokemon__elemento");
+const imageElementTagPokemonPpal = document.querySelector(".pokemon__elemento");
 
 const printInfoPokemonPpal = (name, img, img2, pokemon) => {
   name.innerHTML = `${capitalizeFirstLetter(pokemon.name)}`;
   img.src = `${pokemon.sprites.front_default}`;
   img.alt = `${capitalizeFirstLetter(pokemon.name)}`;
-  // Elemento
+  
+  // Element
   img2.src = `${pokemon.sprites.front_default}`;
   img2.alt = `${capitalizeFirstLetter(pokemon.name)}`;
 
@@ -57,7 +61,7 @@ const printInfoPokemonPpal = (name, img, img2, pokemon) => {
 printInfoPokemonPpal(
   namePokemonPpal,
   imageTagPokemonPpal,
-  imageElementPokemonPpal,
+  imageElementTagPokemonPpal,
   pokemonPpal
 );
 
@@ -99,3 +103,4 @@ document.addEventListener("click", (event) => {
     window.location.href = "./index.html";
   }
 });
+
