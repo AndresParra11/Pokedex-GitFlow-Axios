@@ -45,12 +45,12 @@ const printInfoPokemonPpal = (name, img, img2, pokemon) => {
   img2.alt = `${capitalizeFirstLetter(pokemon.name)}`;
 
   const statsPokemonPpal = [
-    pokemonPpal.id,
-    pokemonPpal.types[0].type.name,
-    pokemonPpal.height,
-    pokemonPpal.stats[1].base_stat,
-    pokemonPpal.abilities[0].ability.name,
-    pokemonPpal.weight,
+    pokemon.id,
+    pokemon.types[0].type.name,
+    pokemon.height,
+    pokemon.stats[1].base_stat,
+    pokemon.abilities[0].ability.name,
+    pokemon.weight,
   ];
 
   for (let i = 1; i <= 6; i++) {
@@ -104,5 +104,35 @@ document.addEventListener("click", (event) => {
 
     sessionStorage.setItem("pokemonPpal", JSON.stringify(selectedPokemon));
     window.location.href = "./index.html";
+  }
+});
+
+const pokemonesAPI = (await getAllPokemonByUrl("https://pokeapi.co/api/v2/pokemon")).results
+console.log(pokemonesAPI)
+//crear busqueda por filtrado de nombre del Pokemon
+const searchPokemonByName = (searchTerm = "") => {
+  const pokemonSearch = getAllPokemonByUrl(`https://pokeapi.co/api/v2/pokemon/${searchTerm}`)
+  return pokemonSearch
+};
+
+const formSearch = document.querySelector(".form")
+formSearch.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const inputSearch = formSearch.children[0];
+  const searchTerm = inputSearch.value;
+  if (searchTerm) {
+    const searchedPokemon = await searchPokemonByName(searchTerm);
+    
+    printInfoPokemonPpal(
+      namePokemonPpal,
+      imageTagPokemonPpal,
+      imageElementTagPokemonPpal,
+      searchedPokemon
+    );
+    if (searchedPokemon.messageSearch) {
+      Swal.fire("Oops!", searchedPokemon.messageSearch, "error");
+    }
+  } else {
+    Swal.fire("Oops!", "No has ingresado un video para buscar.", "error");
   }
 });
