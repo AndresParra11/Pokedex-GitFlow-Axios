@@ -7,7 +7,7 @@ for (let i = 0; i < 5; i++) {
 
 // Creamos la función asincrónica para utilizar el verbo GET y mediante la librería AXIOS
 
-const getAllPokemonById = async (url) => {
+const getAllPokemonByUrl = async (url) => {
   const { data } = await axios.get(url);
   return data;
 };
@@ -15,31 +15,31 @@ const getAllPokemonById = async (url) => {
 const pokemones = [];
 for (let i = 0; i < 5; i++) {
   pokemones.push(
-    await getAllPokemonById(
+    await getAllPokemonByUrl(
       `https://pokeapi.co/api/v2/pokemon/${idPokemones[i]}`
     )
   );
 }
 
-function capitalizarPrimeraLetra(str) {
+function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 const pokemonPpal =
   JSON.parse(sessionStorage.getItem("pokemonPpal")) || pokemones[0];
 const namePokemonPpal = document.querySelector(".pokemon__nombre");
-const imagenPokemonPpal = document.querySelector(".pokemon__imagen");
-const elementoPokemonPpal = document.querySelector(".pokemon__elemento");
+const imageTagPokemonPpal = document.querySelector(".pokemon__imagen");
+const imageElementPokemonPpal = document.querySelector(".pokemon__elemento");
 
-const printPokemonPpal = (name, img, img2, pokemon) => {
-  name.innerHTML = `${capitalizarPrimeraLetra(pokemon.name)}`;
+const printInfoPokemonPpal = (name, img, img2, pokemon) => {
+  name.innerHTML = `${capitalizeFirstLetter(pokemon.name)}`;
   img.src = `${pokemon.sprites.front_default}`;
-  img.alt = `${capitalizarPrimeraLetra(pokemon.name)}`;
+  img.alt = `${capitalizeFirstLetter(pokemon.name)}`;
   // Elemento
   img2.src = `${pokemon.sprites.front_default}`;
-  img2.alt = `${capitalizarPrimeraLetra(pokemon.name)}`;
+  img2.alt = `${capitalizeFirstLetter(pokemon.name)}`;
 
-  const stats = [
+  const statsPokemonPpal = [
     pokemonPpal.id,
     pokemonPpal.types[0].type.name,
     pokemonPpal.height,
@@ -50,29 +50,29 @@ const printPokemonPpal = (name, img, img2, pokemon) => {
 
   for (let i = 1; i <= 6; i++) {
     const stat = document.querySelector(`#stat${i}`);
-    stat.innerHTML = stats[i - 1];
+    stat.innerHTML = statsPokemonPpal[i - 1];
   }
 };
 
-printPokemonPpal(
+printInfoPokemonPpal(
   namePokemonPpal,
-  imagenPokemonPpal,
-  elementoPokemonPpal,
+  imageTagPokemonPpal,
+  imageElementPokemonPpal,
   pokemonPpal
 );
 
-const pokemonesSecundarios = pokemones.filter(
+const pokemonesSecundaries = pokemones.filter(
   (pokemon) => pokemon.id !== pokemonPpal.id
 ); //buscamos el pokemon en el arreglo de pokemones
 
-const printPokemonSec = (pokemonesFooter) => {
+const printImagePokemonesSec = (pokemonesFooter) => {
   for (let i = 0; i < 4; i++) {
-    const imagenPokemonesSecundarios = document.querySelector(`#pok${i + 1}`);
-    imagenPokemonesSecundarios.src = pokemonesFooter[i].sprites.front_default;
-    imagenPokemonesSecundarios.setAttribute("data-id", pokemonesFooter[i].id);
+    const imagePokemonesSecundaries = document.querySelector(`#pok${i + 1}`);
+    imagePokemonesSecundaries.src = pokemonesFooter[i].sprites.front_default;
+    imagePokemonesSecundaries.setAttribute("data-id", pokemonesFooter[i].id);
   }
 };
-printPokemonSec(pokemonesSecundarios);
+printImagePokemonesSec(pokemonesSecundaries);
 
 /* Información necesaria de la API  
 
@@ -89,12 +89,13 @@ printPokemonSec(pokemonesSecundarios);
 //Crearemos la funcionalidad de los botones que va a permitir, mostrar información y imagen de pokemones secundarios seleccionados//
 //Capturar click de pokemones//
 document.addEventListener("click", (event) => {
-  const pokemonSecundario = event.target.getAttribute("name");
-  if (pokemonSecundario === "pokemonSec") {
-    const id = parseInt(event.target.getAttribute("data-id")); //obtenemos el id del pokemon secundario seleccionado
-    const pokemonSeleccionado = pokemones.find((pokemon) => pokemon.id === id); //buscamos el pokemon en el arreglo de pokemones
+  //PokemonSec es igual a los pokemones secundarios que van a parecer en el footer
+  const typePokemon = event.target.getAttribute("name");
+  if (typePokemon === "pokemonSec") {
+    const idPokemonSecundary = parseInt(event.target.getAttribute("data-id")); //obtenemos el id del pokemon secundario seleccionado
+    const selectedPokemon = pokemones.find((pokemon) => pokemon.id === idPokemonSecundary); //buscamos el pokemon en el arreglo de pokemones
 
-    sessionStorage.setItem("pokemonPpal", JSON.stringify(pokemonSeleccionado));
+    sessionStorage.setItem("pokemonPpal", JSON.stringify(selectedPokemon));
     window.location.href = "./index.html";
   }
 });
