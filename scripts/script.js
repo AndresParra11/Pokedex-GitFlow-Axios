@@ -29,7 +29,8 @@ function capitalizeFirstLetter(str) {
 }
 
 // Creamos una función para pintar las imágenes y la información asociada al pokemón principal mostrado en pantalla.
-const pokemonPpal = pokemones[0];
+const pokemonPpal =
+  JSON.parse(sessionStorage.getItem("pokemonPpal")) || pokemones[0];
 const namePokemonPpal = document.querySelector(".pokemon__nombre");
 const imageTagPokemonPpal = document.querySelector(".pokemon__imagen");
 const imageElementTagPokemonPpal = document.querySelector(".pokemon__elemento");
