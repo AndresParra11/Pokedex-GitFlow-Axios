@@ -78,3 +78,4 @@ for (let i = 1; i <= 4; i++) {
 -.stats[1].base_stat
 -.sprites.front_default
 */
+
