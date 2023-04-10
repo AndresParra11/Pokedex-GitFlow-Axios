@@ -107,14 +107,18 @@ document.addEventListener("click", (event) => {
   }
 });
 
-const pokemonesAPI = (await getAllPokemonByUrl("https://pokeapi.co/api/v2/pokemon")).results
+const pokemonesAPI = (
+  await getAllPokemonByUrl("https://pokeapi.co/api/v2/pokemon")
+).results;
 //crear busqueda por filtrado de nombre del Pokemon
 const searchPokemonByName = (searchTerm = "") => {
-  const pokemonSearch = getAllPokemonByUrl(`https://pokeapi.co/api/v2/pokemon/${searchTerm}`)
-  return pokemonSearch
+  const pokemonSearch = getAllPokemonByUrl(
+    `https://pokeapi.co/api/v2/pokemon/${searchTerm}`
+  );
+  return pokemonSearch;
 };
 
-const formSearch = document.querySelector(".form")
+const formSearch = document.querySelector(".form");
 formSearch.addEventListener("submit", async (event) => {
   event.preventDefault();
   const inputSearch = formSearch.children[0];
@@ -122,7 +126,7 @@ formSearch.addEventListener("submit", async (event) => {
   if (searchTerm) {
     try {
       const searchedPokemon = await searchPokemonByName(searchTerm);
-      
+
       printInfoPokemonPpal(
         namePokemonPpal,
         imageTagPokemonPpal,
@@ -130,7 +134,7 @@ formSearch.addEventListener("submit", async (event) => {
         searchedPokemon
       );
     } catch (error) {
-      Swal.fire("Upss!", "Hubo un error en la busqueda", "error")
+      Swal.fire("Upss!", "Hubo un error en la busqueda", "error");
     }
-  }   
+  }
 });
