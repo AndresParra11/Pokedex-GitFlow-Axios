@@ -27,10 +27,15 @@ header {
   align-items: center;
 }
 
-#search-section{
-  display: flex;
-  align-items: center;
+.search-section {
   grid-area: third-post;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.search-section2 {
+  display: none;
 }
 
 .header__logo {
@@ -48,19 +53,19 @@ header {
 
 .form {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
 
 .form__input {
   border: 1px solid gray;
-  border-radius: 50px 0 0  50px;
+  border-radius: 50px 0 0 50px;
   height: 40px;
-  width: 400px;
+  width: 70%;
   padding-left: 15px;
   font-size: 20px;
-  font-family: 'Quicksand', sans-serif;
-  font-family: 'Shantell Sans', sans-serif;
+  font-family: "Quicksand", sans-serif;
+  font-family: "Shantell Sans", sans-serif;
 }
 
 .form__button {
@@ -74,7 +79,7 @@ header {
 }
 
 .material-symbols-outlined {
-  font-family: 'Material Symbols Outlined', sans-serif;
+  font-family: "Material Symbols Outlined", sans-serif;
   font-size: 22px;
   color: black;
 }
@@ -96,6 +101,7 @@ main {
   margin-top: 10%;
   margin-left: 5%;
   margin-right: 5%;
+  height: fit-content;
 }
 
 #pokemon__elemento {
@@ -229,6 +235,16 @@ footer {
 que cumplan con tamaño de máximo 320px */
 
 @media screen and (max-width: 480px) {
+  .search-section {
+    display: none;
+  }
+
+  .form2 {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+
   .header__logo {
     width: 60%;
     margin-top: 20%;
@@ -245,23 +261,33 @@ que cumplan con tamaño de máximo 320px */
 
   main {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(7, 1fr);
+    grid-template-rows: repeat(8, 1fr);
   }
 
   .pokemon__nombre {
     font-size: 5vw;
   }
 
-  .pokemon {
+  .search-section2 {
     grid-area: 1 / 1 / 2 / 4;
+    display: flex;
+    align-items: center;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .pokemon {
+    grid-area: 2 / 1 / 3 / 4;
+    margin-top: 0px;
+    height: fit-content;
   }
 
   .pokemon__imagen {
-    grid-area: 2 / 1 / 6 / 4;
+    grid-area: 3 / 1 / 7 / 4;
   }
 
   .caracteristicas {
-    grid-area: 5 / 1 / 8 / 4;
+    grid-area: 5 / 1 / 9 / 4;
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(6, 1fr);
     width: 80%;

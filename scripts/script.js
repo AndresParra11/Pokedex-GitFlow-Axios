@@ -44,6 +44,7 @@ const printInfoPokemonPpal = (name, img, img2, pokemon) => {
   img2.src = `${pokemon.sprites.front_default}`;
   img2.alt = `${capitalizeFirstLetter(pokemon.name)}`;
 
+  // Stats del pokemon principal que se va a imprimir en pantalla.
   const statsPokemonPpal = [
     pokemon.id,
     pokemon.types[0].type.name,
@@ -53,12 +54,14 @@ const printInfoPokemonPpal = (name, img, img2, pokemon) => {
     pokemon.weight,
   ];
 
+  // Imprimir stats en pantalla.
   for (let i = 1; i <= 6; i++) {
     const stat = document.querySelector(`#stat${i}`);
     stat.innerHTML = statsPokemonPpal[i - 1];
   }
 };
 
+// Llamamos a la función para pintar la información del pokemón principal.
 printInfoPokemonPpal(
   namePokemonPpal,
   imageTagPokemonPpal,
@@ -66,10 +69,12 @@ printInfoPokemonPpal(
   pokemonPpal
 );
 
+// Buscamos el pokemon en el arreglo de pokemones
 const pokemonesSecundaries = pokemones.filter(
   (pokemon) => pokemon.id !== pokemonPpal.id
-); //buscamos el pokemon en el arreglo de pokemones
+);
 
+// Creamos una función para pintar las imágenes de los pokemones secundarios que se muestran en el footer.
 const printImagePokemonesSec = (pokemonesFooter) => {
   for (let i = 0; i < 4; i++) {
     const imagePokemonesSecundaries = document.querySelector(`#pok${i + 1}`);
@@ -77,6 +82,8 @@ const printImagePokemonesSec = (pokemonesFooter) => {
     imagePokemonesSecundaries.setAttribute("data-id", pokemonesFooter[i].id);
   }
 };
+
+// Pintamos los pokemones secundarios en el footer.
 printImagePokemonesSec(pokemonesSecundaries);
 
 /* Información necesaria de la API  
@@ -97,20 +104,17 @@ document.addEventListener("click", (event) => {
   //PokemonSec es igual a los pokemones secundarios que van a aparecer en el footer
   const typePokemon = event.target.getAttribute("name");
   if (typePokemon === "pokemonSec") {
-    const idPokemonSecundary = parseInt(event.target.getAttribute("data-id")); //obtenemos el id del pokemon secundario seleccionado
+    const idPokemonSecundary = parseInt(event.target.getAttribute("data-id")); // Obtenemos el id del pokemon secundario seleccionado.
     const selectedPokemon = pokemones.find(
       (pokemon) => pokemon.id === idPokemonSecundary
-    ); //buscamos el pokemon en el arreglo de pokemones
+    ); //buscamos el pokemon en el arreglo de pokemones.
 
     sessionStorage.setItem("pokemonPpal", JSON.stringify(selectedPokemon));
     window.location.href = "./index.html";
   }
 });
 
-const pokemonesAPI = (
-  await getAllPokemonByUrl("https://pokeapi.co/api/v2/pokemon")
-).results;
-//crear busqueda por filtrado de nombre del Pokemon
+//crear busqueda por filtrado de nombre del Pokemon.
 const searchPokemonByName = (searchTerm = "") => {
   const pokemonSearch = getAllPokemonByUrl(
     `https://pokeapi.co/api/v2/pokemon/${searchTerm}`
@@ -118,10 +122,33 @@ const searchPokemonByName = (searchTerm = "") => {
   return pokemonSearch;
 };
 
+//Creamos la funcionalidad de la barra de búsqueda de pokemón por el nombre para cada tamaño de pantalla.
 const formSearch = document.querySelector(".form");
+const formSearch2 = document.querySelector(".form2");
+
 formSearch.addEventListener("submit", async (event) => {
   event.preventDefault();
   const inputSearch = formSearch.children[0];
+  const searchTerm = inputSearch.value;
+  if (searchTerm) {
+    try {
+      const searchedPokemon = await searchPokemonByName(searchTerm);
+
+      printInfoPokemonPpal(
+        namePokemonPpal,
+        imageTagPokemonPpal,
+        imageElementTagPokemonPpal,
+        searchedPokemon
+      );
+    } catch (error) {
+      Swal.fire("Upss!", "Hubo un error en la busqueda", "error");
+    }
+  }
+});
+
+formSearch2.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const inputSearch = formSearch2.children[0];
   const searchTerm = inputSearch.value;
   if (searchTerm) {
     try {
