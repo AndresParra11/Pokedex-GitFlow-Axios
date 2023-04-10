@@ -45,12 +45,12 @@ const printInfoPokemonPpal = (name, img, img2, pokemon) => {
   img2.alt = `${capitalizeFirstLetter(pokemon.name)}`;
 
   const statsPokemonPpal = [
-    pokemonPpal.id,
-    pokemonPpal.types[0].type.name,
-    pokemonPpal.height,
-    pokemonPpal.stats[1].base_stat,
-    pokemonPpal.abilities[0].ability.name,
-    pokemonPpal.weight,
+    pokemon.id,
+    pokemon.types[0].type.name,
+    pokemon.height,
+    pokemon.stats[1].base_stat,
+    pokemon.abilities[0].ability.name,
+    pokemon.weight,
   ];
 
   for (let i = 1; i <= 6; i++) {
@@ -94,7 +94,7 @@ printImagePokemonesSec(pokemonesSecundaries);
 //Crearemos la funcionalidad de los botones que va a permitir, mostrar información y imagen de pokemones secundarios seleccionados//
 //Capturar click de pokemones//
 document.addEventListener("click", (event) => {
-  //PokemonSec es igual a los pokemones secundarios que van a parecer en el footer
+  //PokemonSec es igual a los pokemones secundarios que van a aparecer en el footer
   const typePokemon = event.target.getAttribute("name");
   if (typePokemon === "pokemonSec") {
     const idPokemonSecundary = parseInt(event.target.getAttribute("data-id")); //obtenemos el id del pokemon secundario seleccionado
@@ -105,4 +105,32 @@ document.addEventListener("click", (event) => {
     sessionStorage.setItem("pokemonPpal", JSON.stringify(selectedPokemon));
     window.location.href = "./index.html";
   }
+});
+
+const pokemonesAPI = (await getAllPokemonByUrl("https://pokeapi.co/api/v2/pokemon")).results
+//crear busqueda por filtrado de nombre del Pokemon
+const searchPokemonByName = (searchTerm = "") => {
+  const pokemonSearch = getAllPokemonByUrl(`https://pokeapi.co/api/v2/pokemon/${searchTerm}`)
+  return pokemonSearch
+};
+
+const formSearch = document.querySelector(".form")
+formSearch.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const inputSearch = formSearch.children[0];
+  const searchTerm = inputSearch.value;
+  if (searchTerm) {
+    try {
+      const searchedPokemon = await searchPokemonByName(searchTerm);
+      
+      printInfoPokemonPpal(
+        namePokemonPpal,
+        imageTagPokemonPpal,
+        imageElementTagPokemonPpal,
+        searchedPokemon
+      );
+    } catch (error) {
+      Swal.fire("Upss!", "Hubo un error en la busqueda", "error")
+    }
+  }   
 });

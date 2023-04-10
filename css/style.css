@@ -12,7 +12,7 @@ header {
   grid-template-rows: 1fr;
   background-color: red;
   border-radius: 40px 40px 0px 0px;
-  grid-template-areas: "first-post second-post second-post second-post second-post";
+  grid-template-areas: "first-post second-post second-post third-post third-post";
 }
 
 #logo-pokebola {
@@ -27,6 +27,12 @@ header {
   align-items: center;
 }
 
+#search-section{
+  display: flex;
+  align-items: center;
+  grid-area: third-post;
+}
+
 .header__logo {
   width: 40%;
   margin-top: 10%;
@@ -38,6 +44,39 @@ header {
   font-size: 5vw;
   font-weight: bold;
   font-family: "Shantell Sans", cursive;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form__input {
+  border: 1px solid gray;
+  border-radius: 50px 0 0  50px;
+  height: 40px;
+  width: 400px;
+  padding-left: 15px;
+  font-size: 20px;
+  font-family: 'Quicksand', sans-serif;
+  font-family: 'Shantell Sans', sans-serif;
+}
+
+.form__button {
+  border: 1px solid gray;
+  background-color: white;
+  border-radius: 0 50px 50px 0;
+  color: #fff;
+  cursor: pointer;
+  height: 42px;
+  padding: 0px 20px;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined', sans-serif;
+  font-size: 22px;
+  color: black;
 }
 
 main {
