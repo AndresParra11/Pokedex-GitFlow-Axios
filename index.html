@@ -18,7 +18,7 @@
       <figure id="logo-pokebola">
         <img
           class="header__logo"
-          src="images/Logo-header.png"
+          src="./assets/images/Logo-header.png"
           alt="Logo de Pokedex"
         />
       </figure>
@@ -60,40 +60,36 @@
           <img class="pokemon__elemento" src="" alt="" />
         </figure>
         <div id="pokemon__nombre">
-          <h1 class="pokemon__nombre">CHARIZARD</h1>
+          <h1 class="pokemon__nombre"></h1>
         </div>
       </section>
       <figure id="pokemon__imagen">
-        <img
-          class="pokemon__imagen"
-          src="images/Charizard.png"
-          alt="Charizard"
-        />
+        <img class="pokemon__imagen" src="" alt="" />
       </figure>
       <section class="caracteristicas">
         <div id="set1" class="set">
           <h2 class="set__hijo">No.</h2>
-          <p class="set__hijo2">006</p>
+          <p id="stat1" class="set__hijo2"></p>
         </div>
         <div id="set2" class="set">
           <h2 class="set__hijo" id="typePokemon">TYPE</h2>
-          <p class="set__hijo2">FIRE</p>
+          <p id="stat2" class="set__hijo2"></p>
         </div>
         <div id="set3" class="set">
-          <h2 class="set__hijo">HEIGHT</h2>
-          <p class="set__hijo2">1,7 m</p>
+          <h2 class="set__hijo">HEIGHT (m)</h2>
+          <p id="stat3" class="set__hijo2"></p>
         </div>
         <div id="set4" class="set">
-          <h2 class="set__hijo">LEVEL</h2>
-          <p class="set__hijo2">100</p>
+          <h2 class="set__hijo">ATTACK</h2>
+          <p id="stat4" class="set__hijo2"></p>
         </div>
         <div id="set5" class="set">
           <h2 class="set__hijo">HABILITY</h2>
-          <p class="set__hijo2">FLAMES</p>
+          <p id="stat5" class="set__hijo2"></p>
         </div>
         <div id="set6" class="set">
-          <h2 class="set__hijo">WEIGHT</h2>
-          <p class="set__hijo2">90,5 kg</p>
+          <h2 class="set__hijo">WEIGHT (kg)</h2>
+          <p id="stat6" class="set__hijo2"></p>
         </div>
       </section>
     </main>
@@ -146,6 +142,7 @@
         </section>
       </div>
     </footer>
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
     <script src="./scripts/script.js" type="module"></script>
   </body>
 </html>
