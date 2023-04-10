@@ -5,8 +5,6 @@ for (let i = 0; i < 5; i++) {
   idPokemones.push(Math.floor(Math.random() * 1000) + 1);
 }
 
-const apiUrl = process.env.API_URL;
-
 // Creamos la función asincrónica para utilizar el verbo GET y mediante la librería AXIOS obtenemos la información de los pokemones asociados a los ID generados aleatoriamente.
 
 const getAllPokemonByUrl = async (url) => {
@@ -17,7 +15,11 @@ const getAllPokemonByUrl = async (url) => {
 // Consumimos la función getAllPokemonByUrl, modificando la URL con el ID de cada pokemón y la almacenamos en un array de pokemones.
 const pokemones = [];
 for (let i = 0; i < 5; i++) {
-  pokemones.push(await getAllPokemonByUrl(`${apiUrl}${idPokemones[i]}`));
+  pokemones.push(
+    await getAllPokemonByUrl(
+      `https://pokeapi.co/api/v2/pokemon/${idPokemones[i]}`
+    )
+  );
 }
 
 // Creamos una función para poner la primera letra en mayúscula.
@@ -114,7 +116,9 @@ document.addEventListener("click", (event) => {
 
 //crear busqueda por filtrado de nombre del Pokemon.
 const searchPokemonByName = (searchTerm = "") => {
-  const pokemonSearch = getAllPokemonByUrl(`${apiUrl}${searchTerm}`);
+  const pokemonSearch = getAllPokemonByUrl(
+    `https://pokeapi.co/api/v2/pokemon/${searchTerm}`
+  );
   return pokemonSearch;
 };
 
