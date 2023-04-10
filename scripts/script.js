@@ -94,7 +94,7 @@ printImagePokemonesSec(pokemonesSecundaries);
 //Crearemos la funcionalidad de los botones que va a permitir, mostrar información y imagen de pokemones secundarios seleccionados//
 //Capturar click de pokemones//
 document.addEventListener("click", (event) => {
-  //PokemonSec es igual a los pokemones secundarios que van a parecer en el footer
+  //PokemonSec es igual a los pokemones secundarios que van a aparecer en el footer
   const typePokemon = event.target.getAttribute("name");
   if (typePokemon === "pokemonSec") {
     const idPokemonSecundary = parseInt(event.target.getAttribute("data-id")); //obtenemos el id del pokemon secundario seleccionado
@@ -108,7 +108,6 @@ document.addEventListener("click", (event) => {
 });
 
 const pokemonesAPI = (await getAllPokemonByUrl("https://pokeapi.co/api/v2/pokemon")).results
-console.log(pokemonesAPI)
 //crear busqueda por filtrado de nombre del Pokemon
 const searchPokemonByName = (searchTerm = "") => {
   const pokemonSearch = getAllPokemonByUrl(`https://pokeapi.co/api/v2/pokemon/${searchTerm}`)
@@ -121,18 +120,17 @@ formSearch.addEventListener("submit", async (event) => {
   const inputSearch = formSearch.children[0];
   const searchTerm = inputSearch.value;
   if (searchTerm) {
-    const searchedPokemon = await searchPokemonByName(searchTerm);
-    
-    printInfoPokemonPpal(
-      namePokemonPpal,
-      imageTagPokemonPpal,
-      imageElementTagPokemonPpal,
-      searchedPokemon
-    );
-    if (searchedPokemon.messageSearch) {
-      Swal.fire("Oops!", searchedPokemon.messageSearch, "error");
+    try {
+      const searchedPokemon = await searchPokemonByName(searchTerm);
+      
+      printInfoPokemonPpal(
+        namePokemonPpal,
+        imageTagPokemonPpal,
+        imageElementTagPokemonPpal,
+        searchedPokemon
+      );
+    } catch (error) {
+      Swal.fire("Upss!", "Hubo un error en la busqueda", "error")
     }
-  } else {
-    Swal.fire("Oops!", "No has ingresado un video para buscar.", "error");
-  }
+  }   
 });
